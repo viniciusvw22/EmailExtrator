@@ -1,0 +1,81 @@
+Gmail:
+• Somente letras, números e pontos são permitidos.
+• O primeiro caractere deve ser uma letra do tipo ascii (a-z) ou um número (0-9).
+• O último caractere deve ser uma letra do tipo ascii (a-z) ou um número (0-9).
+
+Outlook:
+• 
+• 
+• 
+
+EmailXP:
+• Somente números são permitidos.
+
+Email XP2:
+• Somente números pares são permitidos.
+
+Email XP3: 
+• Somente números ímpares são permitidos.
+
+Pseudocódigo:
+
+classe ExtratorEmail
+  tldGenDisp = [".com"]
+  tldPaisDisp = [".fr"]
+  
+  dominios: Email = [gmail, outlook, yahoo, ...]
+  extDominio(posA) -> Email
+  'pode ter ou não ter um domínio após o arroba.  
+    
+
+  extEmails(txtCol)
+    posI = 0
+    faca
+      posA = txtCol.pos("@")
+      se posA <> -1 entao
+	email = extDominio(posA) 
+        ptLocal = email.extptLocal(txtCol, posI, posA)
+	dominio = email.getDominio()
+	se dominio <> "" e ptLocal <> "" entao
+	  email = ptLocalEnc + "@" + dominio
+	  emails = emails + email + novalinha
+	fimse
+	posA += 1
+      fimse 
+    enquanto posA <> -1
+
+classe Email  
+  ptLocal = ""
+  parteDom = "" 
+  tldGen = ""
+  tldPais = ""
+ 
+  extptLocal(txtCol, posI, posA) -> String
+  'pode ter ou não ter uma parte antes do arroba, 
+  'depende da regra de cada email.
+  
+  new(parteDom, tldGen, tldPais)
+    
+  end new
+
+  getDominio()
+    se parteDom <> "" entao 
+      retorne parteDom + tldGen + tldPais
+ 
+classe Gmail: Email
+  nomes = ["gmail"]
+  extptLocal(txtCol, posI, posA) -> String
+    i = posA - 1
+    enquanto i > 0
+      ch = txtCol[i]
+      se ch = "." ou ch.ehAlfaNumerico()
+	i -= 1
+   	continue
+      senao
+	break
+      fimse
+    fimenquanto
+    ptLocal = txtCol[i+1:posA]
+
+classe Outlook: Email
+  nomes = ["outlook", "hotmail"]  
